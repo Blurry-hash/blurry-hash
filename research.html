@@ -49,13 +49,15 @@
     footer p{font-size:12px}
     #northstar-pal{position:fixed;left:0;top:0;z-index:8;width:112px;height:148px;padding:0;border:0;background:transparent;cursor:pointer;touch-action:manipulation;will-change:transform;transform:translate3d(0,0,0);-webkit-tap-highlight-color:transparent}
     #northstar-pal .shadow{position:absolute;left:22px;bottom:8px;width:68px;height:13px;border-radius:50%;background:rgba(25,38,50,.2);filter:blur(6px);transform:scaleX(var(--shadow-scale,.82));opacity:var(--shadow-opacity,.75);will-change:transform,opacity}
-    #northstar-pal .creature{position:absolute;left:8px;top:4px;width:96px;height:132px;transform-style:preserve-3d;perspective:420px;will-change:transform;transform:rotateZ(var(--lean,0deg)) scaleY(var(--stretch,1))}
+    #northstar-pal .creature{position:absolute;left:8px;top:4px;width:96px;height:132px;transform-style:preserve-3d;perspective:420px;will-change:transform;transform:scaleX(var(--facing,1)) rotateZ(var(--lean,0deg)) scale(var(--width-scale,1),var(--stretch,1))}
     #northstar-pal .tail{position:absolute;z-index:0;left:60px;top:68px;width:33px;height:15px;border:7px solid #347f87;border-left:0;border-bottom:0;border-radius:0 90% 0 0;transform-origin:3px 7px;transform:rotate(var(--tail,0deg)) translateZ(-4px);filter:drop-shadow(1px 2px 1px rgba(20,55,65,.18))}
-    #northstar-pal .torso{position:absolute;z-index:2;left:25px;top:47px;width:49px;height:57px;border-radius:47% 47% 42% 42%;background:radial-gradient(ellipse at 30% 18%,#e5fff8 0 5%,#a5e3d7 19%,#58a9a4 53%,#286b78 84%,#194c5c 100%);box-shadow:inset -8px -9px 13px rgba(5,38,53,.3),inset 5px 5px 10px rgba(255,255,255,.65),0 8px 13px rgba(21,57,70,.2);transform:translateZ(7px)}
-    #northstar-pal .belly{position:absolute;z-index:3;left:34px;top:65px;width:31px;height:31px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#fff9e8,#f1d79d 60%,#c69b63);box-shadow:inset -3px -4px 5px rgba(87,62,34,.2);transform:translateZ(14px)}
+    #northstar-pal .torso{position:absolute;z-index:2;left:25px;top:47px;width:49px;height:57px;border-radius:47% 47% 42% 42%;background:radial-gradient(ellipse at 30% 18%,#e5fff8 0 5%,#a5e3d7 19%,#58a9a4 53%,#286b78 84%,#194c5c 100%);box-shadow:inset -8px -9px 13px rgba(5,38,53,.3),inset 5px 5px 10px rgba(255,255,255,.65),0 8px 13px rgba(21,57,70,.2);transform:translateZ(7px) rotateZ(var(--torso-roll,0deg))}
+    #northstar-pal .belly{position:absolute;z-index:3;left:34px;top:65px;width:31px;height:31px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#fff9e8,#f1d79d 60%,#c69b63);box-shadow:inset -3px -4px 5px rgba(87,62,34,.2);transform:translateZ(14px) rotateZ(var(--belly-tilt,0deg))}
     #northstar-pal .head{position:absolute;z-index:5;left:23px;top:8px;width:54px;height:51px;border-radius:48% 48% 45% 45%;background:radial-gradient(circle at 31% 22%,#fff 0 4%,#c9f5ed 14%,#70c0b5 48%,#2b7581 80%,#174958 100%);box-shadow:inset -7px -7px 10px rgba(5,38,53,.28),inset 5px 5px 8px rgba(255,255,255,.72),0 5px 10px rgba(21,57,70,.2);transform:translate3d(0,var(--head-bob,0px),16px) rotateZ(var(--head-tilt,0deg));transform-origin:50% 90%}
     #northstar-pal .eye{position:absolute;top:26px;width:7px;height:10px;border-radius:50%;background:#102b3b;box-shadow:inset 2px 2px 0 #fff;transform:translateZ(22px)}
-    #northstar-pal .eye.left{left:37px}#northstar-pal .eye.right{left:57px}
+    #northstar-pal .eye.left{left:37px}#northstar-pal .eye.right{left:57px;animation-delay:.08s}
+    #northstar-pal .eye{transform-origin:center;animation:pal-blink 5.2s ease-in-out infinite}
+    @keyframes pal-blink{0%,43%,47%,100%{transform:translateZ(22px) scaleY(1)}45%{transform:translateZ(22px) scaleY(.12)}}
     #northstar-pal .cheek{position:absolute;top:39px;width:9px;height:5px;border-radius:50%;background:rgba(238,135,125,.7);transform:translateZ(21px)}
     #northstar-pal .cheek.left{left:28px}#northstar-pal .cheek.right{left:64px}
     #northstar-pal .fin{position:absolute;z-index:4;top:15px;width:17px;height:23px;background:linear-gradient(135deg,#e6fff6,#4f9c9e 75%);border:1px solid rgba(23,81,92,.25);border-radius:80% 12% 80% 12%;box-shadow:inset 2px 2px 3px rgba(255,255,255,.8);transform-origin:80% 90%;transform:rotate(var(--fin-angle,0deg)) translateZ(3px)}
@@ -215,7 +217,9 @@ CONFIDENCE        GROUNDED IN AVAILABLE MATERIAL</pre>
       const width = 112, height = 148, gravity = 1180;
       const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
       const smooth = (a,b,t) => a+(b-a)*t;
-      const set = (name,value) => rig.style.setProperty(name,value.toFixed(2)+(name.includes('angle')||name==='--lean'?'deg':name==='--stretch'?'':'px'));
+      const angleVars = new Set(['--lean','--head-tilt','--tail','--torso-roll','--belly-tilt']);
+      const unitlessVars = new Set(['--stretch','--width-scale','--facing']);
+      const set = (name,value) => rig.style.setProperty(name,value.toFixed(2)+(angleVars.has(name)?'deg':unitlessVars.has(name)?'':'px'));
       const paint = () => { pal.style.transform = 'translate3d('+state.x.toFixed(2)+'px,'+state.y.toFixed(2)+'px,0)'; };
       const stop = () => { if(state.raf) cancelAnimationFrame(state.raf); state.raf=0; state.last=0; };
       const animateRig = (dt) => {
@@ -228,11 +232,14 @@ CONFIDENCE        GROUNDED IN AVAILABLE MATERIAL</pre>
         const lift = airborne ? clamp(-state.vy/560,-.35,.8) : 0;
         const arm = airborne ? 30+lift*22 : 13+speed*.12;
         const leg = airborne ? -24-lift*28 : 18+speed*.08;
+        set('--facing',state.facing);
         set('--lean',clamp(state.vx*.055,-9,9));
         set('--stretch',1+Math.max(0,-state.vy)*.00022-state.impact*.12);
+        set('--width-scale',1+state.impact*.08);
+        set('--torso-roll',s*2.1);
+        set('--belly-tilt',c*1.8);
         set('--head-bob',-2.2+Math.sin(state.phase*1.7)*1.8-state.impact*2);
         set('--head-tilt',Math.sin(state.phase*.7)*4);
-        set('--arm-angle',0);
         rig.querySelector('.arm.left').style.transform='rotate('+(-arm*s-8)+'deg)';
         rig.querySelector('.arm.right').style.transform='rotate('+(arm*s+8)+'deg)';
         rig.querySelector('.arm.left .forearm').style.transform='rotate('+(-18+Math.sin(state.phase+1)*18)+'deg)';
@@ -251,7 +258,7 @@ CONFIDENCE        GROUNDED IN AVAILABLE MATERIAL</pre>
       const frame = (now) => {
         if(document.hidden||state.paused){stop();return;}
         if(!state.last)state.last=now;
-        const dt=Math.min((now-state.last)/1000,.025);
+        const dt=Math.min((now-state.last)/1000,.033);
         state.last=now;
         const maxX=Math.max(0,innerWidth-width),maxY=Math.max(0,innerHeight-height);
         state.hopIn-=dt;
