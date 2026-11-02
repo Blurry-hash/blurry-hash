@@ -216,7 +216,7 @@ CONFIDENCE        GROUNDED IN AVAILABLE MATERIAL</pre>
       const width = 112, height = 148, gravity = 1180;
       const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
       const smooth = (a,b,t) => a+(b-a)*t;
-      const angleVars = new Set(['--lean','--head-tilt','--tail','--torso-roll','--belly-tilt','--spark-angle']);
+      const angleVars = new Set(['--lean','--head-tilt','--tail','--spark-angle','--torso-roll','--belly-tilt','--spark-angle']);
       const unitlessVars = new Set(['--stretch','--width-scale','--facing']);
       const set = (name,value) => rig.style.setProperty(name,value.toFixed(2)+(angleVars.has(name)?'deg':unitlessVars.has(name)?'':'px'));
       const paint = () => { pal.style.transform = 'translate3d('+state.x.toFixed(2)+'px,'+state.y.toFixed(2)+'px,0)'; };
