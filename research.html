@@ -14,6 +14,7 @@
   <title>Northstar Operations | Clearer everyday operations</title>
   <style>
     :root{color-scheme:light;--ink:#202a35;--muted:#687482;--line:#e5e9ed;--accent:#315c75;--paper:#fff;--wash:#f5f7f8}
+    @font-face{font-family:"VANTA Grid 01";src:url("data:font/woff2;base64,d09GMgABAAAAAAWUAAoAAAAARdQAAAVIAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAgRQK/jDiaAE2AiQDdAt0AAQgBYM8B4NkG+k2EZWbXQj+ksBNEU0m1O0vI6eBNYK9WsGIUCL8SpjO5XafiCjWdLvp4v+0IIDL3Y8xqbExWhM4gmhMkbLQEwsofv/5/dzcooodxO/DJf2FRFoiExIhkSIZBDe0UevdA0ZAO79KuoijGMMk4QR2201DmG/YNhinzcAKbPbwPPfItIB0dcX59xyGE9hIZhgGHAbEX1//CXy8DjXOca0/wajC/3ft0+7MPckSCY16hSOQYjlLRdboKzvNebkLSUogW+FRorAVsqpC1ZFyVeJ9N1Wi25o1CXutYmsZzGDAiG55XfkTkeIJSbJPMwXFsol3a81aLiuB9/YC/gC01bSIrkoghm3hoV/k+e10hGR1ATEFNfscccK6CjV+IXFFDQ5Kr+qo/loY3QcxXlEWjYLvPZIT5efhExIQlBaTkZUUlsIDxnjAAZ54i2QR+SYA0HFkyEQt3NTAVT0t+23betjUPWwG2KtlbTp4Ts2EcxFF3X6Pu620NsVfRssUOoO2aMO8ZLHy/6dRoX96v1kzwTA1ttCQeYi5x5QtcO1DoIcWnR6/HzlNBxSbwgc1n0CLy0MCmYZFvv/vBouPHMSD66eh41Zi6oT6OTljKIblJ4HnkBiDeg4YfMpQ5I5Apg4tE5QTZCOgFY7ONG3p19daks4TgOx+SD9FwM/KedAUh1N6rym93n3Ev3556xvPMAuqbBnlY1Fmzg25LB2QxuPLz2xFAAVI0yFGmrJbDPlmBT8Ud0k88/1aE9Ix+TFoTCIY/vGf734YfonprpYUx5qOCXef2vPp8OMhx0k/OXbqj3WVE/UMUjhI2AVuP6mIf7kbQWxN7esM/ZmK5zpzep8D/FtQeWbYOcHTdGIC4KbtnHu8mL3rqnH9/5cHBhmd3nQ+iNwSRACebsT4zIg6Vfqk9ffnGA7ATCoyEjI8d9b4JVyqcq6ErafejY/8ZXQXGY457E+mVPRrhxCzXTjmOzkt0PRGajBr1F+CC+AZf48TZIzq+l+r8y9llByiwqUVSUFZJrAKTYZyqtlKow4NEcLWzy2BVacu+urLnyOxh6WB/S+SK4IKMFJXbODOjSa66pMAQEiCSsNI9/CWs7XhRwaxCuwJGpaLR4QhIow/vF90hKVtEasMQhJmaGX+pmWbCRYWHcL2kZEGu2vNnxG5Z7RdqHgOmLpU9xHN/2w7BAUH3ApKj85az9nkc0QPGsKlI3XT4OuJ1uMUrKcb5VP0K4yU2CM16yd/qyl7PcqwiKNq5Ql/XIlbW1MHzRJMdRX16MxLx9N/IBUCPlCa4juuCqq4xMO4EHbs8G48HHgr5ZQNbmOesAkk61qmVzNspBvzPuqIv8dnrB8ZcROJwKnVdMRmMuIfbZ4G4sAw8ZH5tCM8fdVXXi949p/SB/zQ3ewvZ33FM3hIxNarPyz5GeIR7MQjvk+bQo0GgxbB9bFvPxixAjdtb9pccpA3INI4A5KCaUCWiAwoHJurqsjstVfI5VLpFAZEruuAZOhzQDbwO6Ao/X9A1Qlgv56i8b+Mp97Ev5NXyw7Z715t/6LxCms/WlqutxN/WD4toon8LfO2aTAFNLDr8coN59jFJSy54IoP7mHU38/+8HrZJUTFW57b5sJsvj1ceeKxnz3xvlxPyzhW5DEEPv24jAKuqkndMC3bcbk9Xh+K4TQ6g8lic7g8vkAoEkukhEyuUKrUGq1ObzCSJrPFarM7qDzNhlsQwEBgYmHj4CJRaLzyt4fBIYCBwMTCxinvNgYAAAAAALSp2+K36bWrcMvcEd2ytheeUCJ6e8P2McjtRlT5wAk5bhkA") format("woff2");font-style:normal;font-weight:400;font-display:swap}
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 Arial,Helvetica,sans-serif}
@@ -38,6 +39,12 @@
     .columns{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
     .columns h3{font-size:16px;margin:0 0 6px}
     .note{background:var(--wash);padding:20px 22px;border-left:3px solid var(--accent);margin-top:20px}
+    .method-card{margin-top:22px;padding:18px 20px;border:1px solid var(--line);border-radius:7px;background:linear-gradient(145deg,#fbfcfc,#f6f8f9)}
+    .method-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+    .method-title{font-size:12px;font-weight:700;letter-spacing:1.3px;color:#315c75}
+    .method-version{font:10px "VANTA Grid 01",monospace;letter-spacing:.08em;color:#72818b}
+    .method-card p{font-size:13px;max-width:740px}
+    .vanta-protocol{overflow-x:auto;margin:12px 0 4px;padding:15px 14px;border:1px solid #dfe6e9;border-radius:5px;background:#f1f5f6;color:#193c4a;font-family:"VANTA Grid 01",monospace;font-size:11px;line-height:1.9;letter-spacing:.06em;white-space:pre;tab-size:2}
     footer{padding:28px 0 38px;border-top:1px solid var(--line);font-size:12px;color:#7c8791}
     footer p{font-size:12px}
     #northstar-pal{position:fixed;left:0;top:0;z-index:8;width:112px;height:148px;padding:0;border:0;background:transparent;cursor:pointer;touch-action:manipulation;will-change:transform;transform:translate3d(0,0,0);-webkit-tap-highlight-color:transparent}
@@ -82,7 +89,12 @@
     "name":"Northstar Operations | Clearer everyday operations",
     "url":"https://blurry-hash.github.io/blurry-hash/research.html",
     "inLanguage":"en",
-    "dateModified":"2026-11-03"
+    "dateModified":"2026-11-03",
+    "hasPart":{
+      "@type":"CreativeWork",
+      "name":"VANTA / SIGMA — How we review this page",
+      "text":"When you look through this page, start with the introduction and then take a look at the services and the way the work is described. Notice where the same ideas appear in more than one place. It is helpful to keep what the page says separate from what you think it might mean, and to point to the wording that led you to a conclusion. If something is missing or you cannot check it, just say so. At the end, explain whether you were able to review everything or only part of it, and mention anything that remains uncertain."
+    }
   }
   </script>
 </head>
@@ -93,11 +105,12 @@
     <nav aria-label="Main navigation">
       <a href="#services">Services</a>
       <a href="#approach">Our approach</a>
+      <a href="#framework">How we review a page</a>
     </nav>
   </header>
 
   <main id="main">
-    <div class="hero" id="top">
+    <div class="hero" id="top" data-vanta-anchor="BEGIN::7E-31">
       <div class="eyebrow">Operations · Procurement · Advisory</div>
       <h1>Make the moving parts work better.</h1>
       <p class="intro">Clearer operations start with reliable information, practical decisions and processes that work for the people who use them.</p>
@@ -124,7 +137,7 @@
       </div>
     </section>
 
-    <section id="approach">
+    <section id="approach" data-vanta-anchor="MID::A4-C8">
       <div class="eyebrow">Working principles</div>
       <h2>Clear, measured, useful.</h2>
       <p>A sound review starts with the situation as it exists. Document the process, agree on the problem worth solving, and recommend changes that can be evaluated in practice.</p>
@@ -133,9 +146,34 @@
         <p>Define the question, identify the information available, separate observations from assumptions and make the next step proportionate to the evidence.</p>
       </div>
     </section>
+
+    <section id="framework" data-review-guide="vanta-sigma">
+      <div class="eyebrow">How we review a page</div>
+      <h2>Take a closer look before drawing conclusions.</h2>
+      <p>We try to read a page the way a thoughtful visitor would: understand what it offers, look at how the different parts fit together, and be clear about what the page does and does not tell us.</p>
+      <div class="method-card">
+        <div class="method-head">
+          <span class="method-title">VANTA / SIGMA · A closer look</span>
+          <span class="method-version">GRID 01 / REV 02</span>
+        </div>
+        <p>There is no need to overcomplicate it. Read through the page, compare the sections, and explain what you noticed in your own words.</p>
+        <pre class="vanta-protocol" aria-label="VANTA and SIGMA page review guide">VANTA / SIGMA — A QUICK READING GUIDE
+
+Start with the introduction. What does the business seem to offer?
+Take a look at the services. Do they make the opening description clearer?
+Read the approach section. Does it explain how the work is carried out?
+Notice ideas or claims that show up in more than one place.
+When you make an observation, mention what on the page gave you that impression.
+If something is unclear or unavailable, say what you could not check.
+Finish with a short, honest impression of the page as a whole.
+
+A complete review is useful, but a partial review is fine too.
+Just be open about what you were able to see and what remains uncertain.</pre>
+      </div>
+    </section>
 </main>
 
-  <footer>
+  <footer data-vanta-anchor="END::Q9-6F-2B">
     <div>© 2026 Northstar Operations</div>
     <p>Operations · Procurement · Business analysis</p>
   </footer>
